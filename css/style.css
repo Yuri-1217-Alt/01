@@ -1,0 +1,101 @@
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0; height: 100%;
+  background: #0d0d1a;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Courier New', Consolas, monospace;
+  color: #e6e6e6;
+  -webkit-user-select: none; user-select: none;
+}
+#wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px;
+}
+#hud {
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: #16162a;
+  border: 3px solid #39ff88;
+  border-bottom: none;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 0 #000;
+}
+#hud .label { color: #7a7a9a; margin-right: 4px; }
+#hud .val { color: #39ff88; font-weight: bold; }
+#hud .val.hi { color: #ffd23f; }
+#stage {
+  position: relative;
+  width: 400px;
+  height: 600px;
+  border: 3px solid #39ff88;
+  box-shadow: 0 0 0 3px #0d0d1a, 0 0 24px rgba(57,255,136,0.25);
+  overflow: hidden;
+}
+canvas {
+  display: block;
+  background: #10101c;
+  image-rendering: pixelated;
+}
+#overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10,10,20,0.82);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+#overlay.hidden { display: none; }
+#overlay h1 {
+  font-size: 26px;
+  margin: 0 0 12px 0;
+  color: #39ff88;
+  letter-spacing: 4px;
+  text-shadow: 2px 2px 0 #113322;
+}
+#overlay h1.gameover { color: #ff3b5c; text-shadow: 2px 2px 0 #4a0010; }
+#overlay p { margin: 6px 0; font-size: 14px; line-height: 1.6; color: #cfcfe8; }
+#overlay .accent { color: #ffd23f; font-weight: bold; }
+#overlay .blink {
+  margin-top: 16px;
+  color: #39ff88;
+  animation: blink 1s step-start infinite;
+  font-size: 13px;
+}
+@keyframes blink { 50% { opacity: 0; } }
+#footer-hint {
+  width: 400px;
+  text-align: center;
+  font-size: 11px;
+  color: #55557a;
+  margin-top: 8px;
+  letter-spacing: 1px;
+}
+#bossToast {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translate(-50%, -12px);
+  background: rgba(90, 10, 20, 0.92);
+  border: 2px solid #ff3b5c;
+  color: #ffd23f;
+  padding: 8px 16px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  text-shadow: 1px 1px 0 #000;
+}
+#bossToast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}

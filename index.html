@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小朋友下樓梯</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="wrap">
+  <div id="hud">
+    <span><span class="label">分數</span><span class="val" id="scoreVal">0</span></span>
+    <span><span class="label">最高分</span><span class="val hi" id="highVal">0</span></span>
+  </div>
+  <div id="stage">
+    <canvas id="game" width="400" height="600"></canvas>
+    <div id="bossToast"></div>
+    <div id="overlay">
+      <h1 id="overlayTitle">小朋友下樓梯</h1>
+      <p>← → 或 <span class="accent">A / D</span> 左右移動</p>
+      <p id="overlayMsg"></p>
+      <p class="blink" id="overlayBlink">按下方向鍵開始移動即可開始遊戲</p>
+    </div>
+  </div>
+  <div id="footer-hint">小心紅色尖刺・別被上緣擠壓・一直往下爬吧！</div>
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
