@@ -3,6 +3,8 @@ export class AudioManager {
     this.bgm = new Audio('assets/audio/bgm.mp3?v=' + Date.now());
     this.bgm.loop = true;
     this.bgm.volume = 0.45;
+    this.deathSound = new Audio('assets/audio/death.mp3');
+    this.deathSound.volume = 0.8;
     this.isMuted = false;
     this.isPlaying = false;
   }
@@ -30,10 +32,23 @@ export class AudioManager {
     this.isPlaying = false;
   }
 
+  playDeath() {
+    if (this.isMuted) return;
+    try {
+      this.deathSound.currentTime = 0;
+      this.deathSound.play().catch(err => {
+        console.log('Death sound play prevented:', err);
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   toggleMute() {
     this.isMuted = !this.isMuted;
     if (this.isMuted) {
       this.bgm.pause();
+      this.deathSound.pause();
     } else {
       this.playBGM();
     }

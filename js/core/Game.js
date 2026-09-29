@@ -84,8 +84,10 @@ export class Game {
   }
 
   endGame(reason) {
+    if (this.state === 'gameover') return;
     this.state = 'gameover';
     this.audio.pauseBGM();
+    this.audio.playDeath();
     this.hud.showGameOver(reason, this.score);
   }
 
