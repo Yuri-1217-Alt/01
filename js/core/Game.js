@@ -3,6 +3,7 @@ import { Player } from '../entities/Player.js';
 import { PlatformManager } from '../entities/PlatformManager.js';
 import { Physics } from '../systems/Physics.js';
 import { ParticleSystem } from '../systems/ParticleSystem.js';
+import { AudioManager } from '../systems/AudioManager.js';
 
 export class Game {
   constructor(canvas, hud, input) {
@@ -11,6 +12,7 @@ export class Game {
     this.ctx.imageSmoothingEnabled = false;
     this.hud = hud;
     this.input = input;
+    this.audio = new AudioManager();
 
     this.state = 'ready';
     this.player = new Player(CONFIG.W / 2, 40);
@@ -29,11 +31,29 @@ export class Game {
         this.start();
       }
     };
+
+    this.input.onToggleMute = () => {
+      this.toggleMusic();
+    };
+
+    if (this.hud.musicBtn) {
+      this.hud.musicBtn.addEventListener('click', () => {
+        this.toggleMusic();
+      });
+    }
     
     this.reset();
   }
 
+  toggleMusic() {
+    const isMuted = this.audio.toggleMute();
+    this.hud.updateMusicBtn(isMuted);
+  }
+
   reset() {
+    if (this.audio) {
+      this.audio.stopBGM();
+    }
     this.player = new Player(CONFIG.W / 2, 40);
     this.platformManager.reset();
     this.cameraY = 0;
@@ -50,10 +70,12 @@ export class Game {
     this.reset();
     this.state = 'playing';
     this.hud.hideOverlay();
+    this.audio.playBGM();
   }
 
   endGame(reason) {
     this.state = 'gameover';
+    this.audio.pauseBGM();
     this.hud.showGameOver(reason, this.score);
   }
 

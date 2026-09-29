@@ -7,6 +7,7 @@ export class HUD {
     this.overlayTitle = document.getElementById('overlayTitle');
     this.overlayMsg = document.getElementById('overlayMsg');
     this.overlayBlink = document.getElementById('overlayBlink');
+    this.musicBtn = document.getElementById('musicBtn');
 
     this.toastTimer = null;
     this.highScore = 0;
@@ -67,5 +68,16 @@ export class HUD {
     this.overlayMsg.innerHTML = reason + '<br>本次分數：<span class="accent">' + score + '</span>　最高分：<span class="accent">' + this.highScore + '</span>';
     this.overlayBlink.textContent = '按下［空白鍵］重新開始';
     this.overlay.classList.remove('hidden');
+  }
+
+  updateMusicBtn(isMuted) {
+    if (!this.musicBtn) return;
+    if (isMuted) {
+      this.musicBtn.textContent = '🔇 靜音';
+      this.musicBtn.classList.add('muted');
+    } else {
+      this.musicBtn.textContent = '🔊 音樂';
+      this.musicBtn.classList.remove('muted');
+    }
   }
 }

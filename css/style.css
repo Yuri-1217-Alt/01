@@ -28,6 +28,27 @@ html, body {
 #hud .label { color: #7a7a9a; margin-right: 4px; }
 #hud .val { color: #39ff88; font-weight: bold; }
 #hud .val.hi { color: #ffd23f; }
+#musicBtn {
+  background: rgba(57, 255, 136, 0.12);
+  border: 1px solid #39ff88;
+  color: #39ff88;
+  font-family: inherit;
+  font-size: 12px;
+  padding: 2px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+#musicBtn:hover {
+  background: rgba(57, 255, 136, 0.25);
+  box-shadow: 0 0 8px rgba(57, 255, 136, 0.4);
+}
+#musicBtn.muted {
+  border-color: #7a7a9a;
+  color: #7a7a9a;
+  background: rgba(122, 122, 154, 0.12);
+}
 #stage {
   position: relative;
   width: 400px;

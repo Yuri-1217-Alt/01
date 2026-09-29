@@ -2,6 +2,7 @@ export class InputHandler {
   constructor() {
     this.keys = { left: false, right: false, space: false };
     this.onStart = null;
+    this.onToggleMute = null;
     this._bindEvents();
   }
 
@@ -17,6 +18,9 @@ export class InputHandler {
       if (e.code === 'ArrowLeft' || e.code === 'KeyA') this.keys.left = true;
       if (e.code === 'ArrowRight' || e.code === 'KeyD') this.keys.right = true;
       if (e.code === 'Space') this.keys.space = true;
+      if (e.code === 'KeyM') {
+        if (this.onToggleMute) this.onToggleMute();
+      }
       
       if (this.onStart) {
         if (this._isMoveKey(e.code) || e.code === 'Space') {
