@@ -1,6 +1,6 @@
 export class AudioManager {
   constructor() {
-    this.bgm = new Audio('assets/audio/bgm.mp3');
+    this.bgm = new Audio('assets/audio/bgm.mp3?v=' + Date.now());
     this.bgm.loop = true;
     this.bgm.volume = 0.45;
     this.isMuted = false;

@@ -37,8 +37,18 @@ export class Game {
     };
 
     if (this.hud.musicBtn) {
-      this.hud.musicBtn.addEventListener('click', () => {
+      this.hud.musicBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         this.toggleMusic();
+      });
+    }
+
+    const stage = document.getElementById('stage');
+    if (stage) {
+      stage.addEventListener('click', () => {
+        if (this.state === 'ready' || this.state === 'gameover') {
+          this.start();
+        }
       });
     }
     

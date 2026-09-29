@@ -53,8 +53,8 @@ export class HUD {
     this.overlay.classList.remove('hidden');
     this.overlayTitle.textContent = '小朋友下樓梯';
     this.overlayTitle.classList.remove('gameover');
-    this.overlayMsg.innerHTML = '← → 或 <span class="accent">A / D</span> 左右移動';
-    this.overlayBlink.textContent = '按下方向鍵開始移動即可開始遊戲';
+    this.overlayMsg.innerHTML = '← → 或 <span class="accent">A / D</span> 左右移動<br>按 <span class="accent">M</span> 鍵可開關音樂 🎵';
+    this.overlayBlink.textContent = '點擊畫面或按方向鍵即可開始 (播放音樂 🎵)';
   }
 
   hideOverlay() {
@@ -66,7 +66,7 @@ export class HUD {
     this.overlayTitle.textContent = 'GAME OVER';
     this.overlayTitle.classList.add('gameover');
     this.overlayMsg.innerHTML = reason + '<br>本次分數：<span class="accent">' + score + '</span>　最高分：<span class="accent">' + this.highScore + '</span>';
-    this.overlayBlink.textContent = '按下［空白鍵］重新開始';
+    this.overlayBlink.textContent = '點擊畫面或按［空白鍵］重新開始';
     this.overlay.classList.remove('hidden');
   }
 
