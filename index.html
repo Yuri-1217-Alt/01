@@ -12,10 +12,12 @@
   <div id="hud">
     <span><span class="label">分數</span><span class="val" id="scoreVal">0</span></span>
     <button id="musicBtn" class="hud-btn" type="button" title="切換音樂 (按 M 鍵)">🔊 音樂</button>
-    <span><span class="label">最高分</span><span class="val hi" id="highVal">0</span></span>
+    <div class="hud-right">
+      <span class="hud-author">made by yuri</span>
+      <span><span class="label">最高分</span><span class="val hi" id="highVal">0</span></span>
+    </div>
   </div>
   <div id="stage">
-    <div id="authorTag">Mady By Yuri</div>
     <canvas id="game" width="400" height="600"></canvas>
     <div id="bossToast"></div>
     <div id="overlay">
