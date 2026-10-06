@@ -3,21 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>小朋友下樓梯</title>
+<title>小朋友下樓梯 - Yuri</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div id="wrap">
-  <div id="hud">
-    <span><span class="label">分數</span><span class="val" id="scoreVal">0</span></span>
-    <button id="musicBtn" class="hud-btn" type="button" title="切換音樂 (按 M 鍵)">🔊 音樂</button>
-    <div class="hud-right">
-      <span class="hud-author">made by yuri</span>
-      <span><span class="label">最高分</span><span class="val hi" id="highVal">0</span></span>
-    </div>
+<!-- Top Navigation Bar matching the reference UI -->
+<header class="top-nav">
+  <div class="nav-left">
+    <span class="badge-playing">PLAYING</span>
+    <span class="nav-title">小朋友下樓梯</span>
+    <span class="nav-author">創作者：Yuri (小朋友下樓梯)</span>
   </div>
+  <div class="nav-right">
+    <button id="musicBtn" class="nav-btn nav-btn-music" type="button" title="切換音樂 (按 M 鍵)">🔊 音樂</button>
+    <button id="btnRestart" class="nav-btn" type="button" title="重新開始">
+      <svg class="nav-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+      重新開始
+    </button>
+    <button id="btnFullscreen" class="nav-btn" type="button" title="全螢幕">
+      <svg class="nav-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+      全螢幕
+    </button>
+    <button id="btnNewTab" class="nav-btn" type="button" title="在新分頁開啟">
+      <svg class="nav-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m4-3h6v6m-11 5L21 3"/></svg>
+      新分頁
+    </button>
+    <button id="btnClose" class="nav-btn nav-btn-danger" type="button" title="關閉返回">
+      <svg class="nav-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      關閉返回
+    </button>
+  </div>
+</header>
+
+<!-- Main Game Canvas Container -->
+<main class="main-content">
   <div id="stage">
+    <div id="hud">
+      <span><span class="label">SCORE:</span> <span class="val" id="scoreVal">0</span></span>
+      <div class="hud-right">
+        <span><span class="label">HI:</span> <span class="val hi" id="highVal">0</span></span>
+      </div>
+    </div>
     <canvas id="game" width="400" height="600"></canvas>
     <div id="bossToast"></div>
     <div id="overlay">
@@ -25,11 +52,31 @@
       <p>← → 或 <span class="accent">A / D</span> 左右移動</p>
       <p>按 <span class="accent">M</span> 鍵可開關背景音樂 🎵</p>
       <p id="overlayMsg"></p>
-      <p class="blink" id="overlayBlink">點擊畫面或按方向鍵即可開始 (播放音樂 🎵)</p>
+      <p class="blink" id="overlayBlink">按下［空白鍵］或點擊開始遊戲 (播放音樂 🎵)</p>
     </div>
   </div>
-  <div id="footer-hint">小心紅色尖刺・別被上緣擠壓・一直往下爬吧！</div>
-</div>
+
+  <!-- Music Credit & Source Annotation -->
+  <footer class="game-footer">
+    <div class="credit-card">
+      <div class="credit-header">
+        <span class="credit-badge">AUDIO CREDITS</span>
+        <span class="credit-subtitle">音訊與音樂來源標註</span>
+      </div>
+      <div class="credit-content">
+        <div class="credit-item">
+          <span class="credit-tag bgm-tag">🎵 背景音樂</span>
+          <span class="credit-text">由 Yuri 提供之原創遊戲背景音樂（BGM）</span>
+        </div>
+        <div class="credit-item">
+          <span class="credit-tag sfx-tag">💀 死亡音效</span>
+          <span class="credit-text">Roblox Classic "Oof" Sound Effect（經典遊戲音效）</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-hint">遊戲提示：小心紅色尖刺・別被上緣捲動擠壓・一直往下爬爭取最高分！</div>
+  </footer>
+</main>
 
 <script type="module" src="js/main.js"></script>
 </body>
