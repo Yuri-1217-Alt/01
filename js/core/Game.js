@@ -23,8 +23,8 @@ export class Game {
     this.maxCameraY = 0;
     this.score = 0;
     this.elapsedTime = 0;
-    this.bossWaveAnnounced = false;
-    this.bossWaveEnded = false;
+    this.movingWaveAnnounced = false;
+    this.movingWaveEnded = false;
 
     this.input.onStart = (code) => {
       if (this.state === 'ready' || (this.state === 'gameover' && code === 'Space')) {
@@ -70,8 +70,8 @@ export class Game {
     this.maxCameraY = 0;
     this.score = 0;
     this.elapsedTime = 0;
-    this.bossWaveAnnounced = false;
-    this.bossWaveEnded = false;
+    this.movingWaveAnnounced = false;
+    this.movingWaveEnded = false;
     this.hud.updateScore(0);
     this.hud.hideToast();
   }
@@ -124,21 +124,30 @@ export class Game {
       this.hud.updateScore(this.score);
     }
 
-    if (!this.bossWaveAnnounced && this.score >= CONFIG.BOSS_WAVE_START_LAYER) {
-      this.bossWaveAnnounced = true;
-      this.hud.showToast(`⚠ BOSS WAVE：躲避尖刺，撐過 ${CONFIG.BOSS_WAVE_LENGTH} 層！`, 3000);
-    }
-    if (!this.bossWaveEnded && this.score >= CONFIG.BOSS_WAVE_END_LAYER) {
-      this.bossWaveEnded = true;
-      this.hud.showToast('BOSS WAVE 結束！', 2000);
+    // Bug fix: kill player if scrolled above the top of the screen
+    const screenY = this.player.y - this.cameraY;
+    if (screenY + this.player.h / 2 < 0) {
+      this.endGame('被捲上去了！');
+      return;
     }
 
-    if (this.player.y - this.cameraY > CONFIG.H) {
+    // Moving wave announcements (replaces spike boss wave)
+    if (!this.movingWaveAnnounced && this.score >= CONFIG.MOVING_WAVE_START_LAYER) {
+      this.movingWaveAnnounced = true;
+      this.hud.showToast(`⚡ 移動平台波：撐過 ${CONFIG.MOVING_WAVE_LENGTH} 層！`, 3000);
+    }
+    if (!this.movingWaveEnded && this.score >= CONFIG.MOVING_WAVE_END_LAYER) {
+      this.movingWaveEnded = true;
+      this.hud.showToast('移動平台波結束！繼續加油！', 2000);
+    }
+
+    // Bottom-edge check
+    if (screenY > CONFIG.H) {
       this.endGame('掉到最底層，被淘汰了！');
       return;
     }
 
-    this.platformManager.update(this.cameraY, this.score);
+    this.platformManager.update(this.cameraY, this.score, dt);
     this.particleSystem.update(dt);
   }
 
@@ -148,10 +157,6 @@ export class Game {
     this.ctx.save();
     const stripeH = 40;
     const offset = ((this.cameraY * 0.4) % stripeH + stripeH) % stripeH;
-    for (let y = -stripeH; y < CONFIG.H + stripeH; y += stripeH) {
-      const yy = y - offset;
-      this.ctx.fillStyle = (Math.floor((y - offset + this.cameraY) / stripeH) % 2 === 0) ? '#121222' : '#151528';
-    }
     this.ctx.fillStyle = '#141428';
     for (let i = -1; i * stripeH - offset < CONFIG.H + stripeH; i++) {
       if (i % 2 === 0) continue;

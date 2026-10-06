@@ -92,6 +92,7 @@ html, body {
   background: rgba(57, 255, 136, 0.12);
   border-color: rgba(57, 255, 136, 0.35);
   color: #39ff88;
+  text-decoration: none;
 }
 
 .nav-btn-music:hover {
@@ -321,6 +322,18 @@ canvas {
 
 .credit-text {
   color: #cbd5e1;
+}
+
+.credit-link {
+  color: #4eedd8;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(78, 237, 216, 0.4);
+  transition: color 0.2s ease;
+}
+
+.credit-link:hover {
+  color: #a0f9ef;
+  border-bottom-color: #4eedd8;
 }
 
 .footer-hint {
